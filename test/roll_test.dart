@@ -24,12 +24,27 @@ void main() {
 
       expect(newGame.score(), equals(20));
     });
-  });
+  },tags: ['simple','complete']);
 
-  test('roll one spare', () {
-    rollMany(5, 2);
-    newGame.roll(3);
-    rollMany(0, 17);
-    expect(newGame.score(), 16);
-  });
+  group('bonus points cases', () {
+    test('roll one spare', () {
+      rollMany(5, 2);
+      newGame.roll(3);
+      rollMany(0, 17);
+      expect(newGame.score(), 16);
+    });
+
+    test('roll strike', () {
+      newGame.roll(10);
+      newGame.roll(3);
+      newGame.roll(4);
+      rollMany(0, 16);
+      expect(newGame.score(), 24);
+    });
+
+    test('perfect game', () {
+      rollMany(10, 12);
+      expect(newGame.score(), 300);
+    });
+  },tags: 'complete');
 }
